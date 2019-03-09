@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<main class="main">
+    <div class="container">
+    <h1 style="text-align: center">Запись на диагностику</h1>
+        <div class="content-box padding slow-view" style="max-width: 305px;">
+
+            <form id="sent-form" class="form-horizontal" action="{% url 'home' %}" method="POST" >
+                {% csrf_token %}
+                {% for field in form  %}
+                    <div class="input-wrap" >
+                    <label style="margin: 6px 0px 0px 4px;">{{ field.label }}:</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn--font-weight">Отправить</button>
+                </div>
+                <p id="form-errors">{{error}}</p>
+            </form>
+        </div>
+    </div>
+</main>
+    <script type="text/javascript">
+        $('#sent-form').submit(function () {
+            $("#form-errors").val('');
+            var url = "{{ request.get_full_path }}";
+            $.ajax({
+                data: $(this).serialize(),
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                dataType: 'html',
+                success: function () {
+                    document.location.href = url.replace('', 'accepted');
+                },
+                error: function (data) {
+                    $("#form-errors").html(JSON.parse(data.responseText)['form']['__all__'][0]);
+                }
+            });
+            return false;
+        });
+    </script>
+{% endblock %}
