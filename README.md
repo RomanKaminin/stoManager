@@ -1,6 +1,7 @@
-Для развёртывания проекта у вас должен быть установлен "docker-compose"
+*Для развёртывания проекта у вас должен быть установлен "docker-compose" 
 1) docker-compose build
 2) docker-compose up 
-3) docker-compose run --rm django_project python ./manage.py createsuperuser --email admin@example.com --username admin
-4) после старта  докера приложение будет доступно  http://127.0.0.1:8000
-
+3) после старта  докера приложение будет доступно  http://127.0.0.1:82 (порт можете указать любой какой нужно в файле docker-compose.yml)
+4) во время старта докера будет загружен дамп базы с тестовыми данными
+5) для входа в админку (http://127.0.0.1:82/admin) использовать: login: admin, password: r4r4r4r4
+6) запуск тестов из дериктории django_project спомощью python ./manage.py test app

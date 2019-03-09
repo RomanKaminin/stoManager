@@ -7,7 +7,6 @@ from .utils import CarMark
 
 class Manager(MPTTModel):
     class Meta:
-        db_table = "managers"
         verbose_name_plural = "Менеджеры"
         verbose_name = "Менеджер"
         ordering = ("tree_id", "level")
@@ -52,7 +51,6 @@ class Statement(models.Model):
         Manager,
         blank=False,
         null=False,
-        # related_name='cat',
         verbose_name="Менеджер",
         on_delete=models.CASCADE,
     )
