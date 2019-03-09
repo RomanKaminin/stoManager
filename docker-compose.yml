@@ -9,23 +9,18 @@ services:
       - "POSTGRES_USER=sto_manager"
       - "POSTGRES_PASSWORD=sto_manager"
       - "PGDATA=/data/postgres"
-
-
-#  django_project:
-#    restart: always
-#    command: 'bash -c "python3 manage.py migrate && python3 ./manage.py migrate app &&
-#          python3 ./manage.py makemigrations app && python3 ./manage.py loaddata test_data.json &&
-#          python3 manage.py runserver 0.0.0.0:8000"'
-#    build:
-#      dockerfile: "Dockerfile"
-#      context: "./django_project"
-#    ports:
-#    - 8000:8000
-#    depends_on:
-#    - postgres
-
-
-
+  django_project:
+    restart: always
+    command: 'bash -c "python3 manage.py migrate && python3 ./manage.py migrate app &&
+          python3 ./manage.py makemigrations app &&
+          python3 manage.py runserver 0.0.0.0:8000"'
+    build:
+      dockerfile: "Dockerfile"
+      context: "./django_project"
+    ports:
+    - 82:8000
+    depends_on:
+    - postgres
 
 
      

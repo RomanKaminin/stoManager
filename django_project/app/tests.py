@@ -19,6 +19,7 @@ class StatementModelTest(unittest.TestCase):
         )
         return self.client
 
+
     def test_client_model_creation(self):
         new_client = self.create_client_manager()
         self.assertTrue(isinstance(new_client, Statement))

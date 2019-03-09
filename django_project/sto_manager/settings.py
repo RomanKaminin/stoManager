@@ -83,8 +83,8 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "sto_manager",
         "PASSWORD": "sto_manager",
-        "HOST": "::",
-        "PORT": "6432",
+        "HOST": "postgres",
+        "PORT": "5432",
     }
 }
 
