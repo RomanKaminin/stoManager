@@ -1,14 +1,15 @@
+from django.http import JsonResponse
 from django.views.generic import CreateView, TemplateView
+
 from .forms import StatementForm
 from .models import Statement
-from django.http import JsonResponse
 
 
 class StatementCreate(CreateView):
     model = Statement
     form_class = StatementForm
-    template_name = 'sent_statement.html'
-    success_url = '/accepted'
+    template_name = "sent_statement.html"
+    success_url = "/accepted"
 
     def form_invalid(self, form):
         if self.request.is_ajax():
@@ -20,6 +21,3 @@ class StatementCreate(CreateView):
 
 class AcceptedView(TemplateView):
     template_name = "accepted.html"
-
-
-
