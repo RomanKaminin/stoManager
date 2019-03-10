@@ -57,12 +57,15 @@ class Statement(models.Model):
     )
 
     def clean(self):
-        if self.manager is not None and Statement.objects.filter(
-                manager=self.manager,
-                date=self.date,
-                time=self.time
-        ).exists():
-            raise ValidationError("Запись с такой датой и временем у выбранного вами менеджера уже занята.")
+        if (
+            self.manager is not None
+            and Statement.objects.filter(
+                manager=self.manager, date=self.date, time=self.time
+            ).exists()
+        ):
+            raise ValidationError(
+                "Запись с такой датой и временем у выбранного вами менеджера уже занята."
+            )
 
     def __str__(self):
         return self.username

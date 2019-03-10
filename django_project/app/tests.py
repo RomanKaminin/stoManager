@@ -1,6 +1,7 @@
 import unittest
 
 from app.models import Manager, Statement
+
 from .utils import CarMark
 
 
@@ -17,7 +18,6 @@ class StatementModelTest(unittest.TestCase):
             manager=self.manager,
         )
         return self.client
-
 
     def test_client_model_creation(self):
         new_client = self.create_client_manager()
