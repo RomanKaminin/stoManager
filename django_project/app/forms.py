@@ -70,15 +70,13 @@ class StatementForm(forms.ModelForm):
             "20:00",
         ]
         unavailable_time = Statement.objects.filter(manager=manager, date=date)
-        unavailable_hours = []
-        for record in unavailable_time:
-            unavailable_hours.append(record.time)
+        unavailable_hours = [x.time for x in unavailable_time]
         available_hours = [x for x in all_hours if x not in unavailable_hours]
         error = " ,".join(available_hours)
         if Statement.objects.filter(manager=manager, date=date, time=time).exists():
             raise forms.ValidationError(
                 """
-                Извините но данное время у выбранного вами менеджера уже занято, 
+                Извините но данное время у выбранного вами менеджера уже занято,
                 вы можете записаться на следующие часы: {}
                 """.format(
                     error

@@ -1,4 +1,5 @@
 import mptt
+from django.core.exceptions import ValidationError
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -54,6 +55,14 @@ class Statement(models.Model):
         verbose_name="Менеджер",
         on_delete=models.CASCADE,
     )
+
+    def clean(self):
+        if self.manager is not None and Statement.objects.filter(
+                manager=self.manager,
+                date=self.date,
+                time=self.time
+        ).exists():
+            raise ValidationError("Запись с такой датой и временем у выбранного вами менеджера уже занята.")
 
     def __str__(self):
         return self.username
